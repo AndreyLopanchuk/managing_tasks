@@ -1,12 +1,7 @@
 # Установка
-
-1. Склонировать репозиторий, выполнить команды:  
+  
 `git init`  
-`git remote add origin git@github.com:AndreyLopanchuk/managing_tasks.git`  
-`git pull origin main --allow-unrelated-histories`  
-
-2. Добавить текущую рабочую директорию в начало переменной окружения, выполнить команду:  
-`export PYTHONPATH=$PWD:$PYTHONPATH`  
+`git clone https://github.com/AndreyLopanchuk/managing_tasks.git`  
 
 # Запуск  
 
