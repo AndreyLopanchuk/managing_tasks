@@ -92,5 +92,4 @@ async def refresh(
     user: UserDBSchema = Depends(get_current_auth_user_for_refresh),
 ):
     access_token = await create_access_token(user)
-    response.headers["Authorization"] = f"Bearer {access_token}"
     return {"access_token": access_token}
