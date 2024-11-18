@@ -1,0 +1,23 @@
+[tool.black]
+line-length = 119
+extend-exclude = "alembic"
+
+[tool.isort]
+line_length = 120
+extend_skip = "alembic"
+
+[tool.mypy]
+plugins = 'sqlalchemy.ext.mypy.plugin'
+exclude = 'alembic'
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests", ]
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+data_file = "tests/coverage/.coverage"
+omit = ["tests/*"]
+
+[tool.coverage.html]
+directory = "tests/coverage/"

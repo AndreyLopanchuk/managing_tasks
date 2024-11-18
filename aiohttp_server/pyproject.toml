@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "aiohttp_server"
+version = "0.1.0"
+description = ""
+authors = ["andrey <dred2spb79@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+aiohttp = "^3.10.10"
+aiohttp-asgi = "^0.5.2"
+passlib = "^1.7.4"
+pydantic-settings = "^2.6.1"
+asyncpg = "^0.30.0"
+aiohttp-devtools = "^1.1.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

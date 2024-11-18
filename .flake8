@@ -1,0 +1,6 @@
+[flake8]
+max-line-length=120
+max-doc-length=119
+extend-exclude=venv,conf,scripts,*env,alembic
+
+ignore = B008

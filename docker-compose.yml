@@ -1,0 +1,67 @@
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: fastapi_app/Dockerfile
+    volumes:
+      - ./fastapi_app:/fastapi_app
+      - ./config.py:/config.py
+    working_dir: /
+    command: sh -c "uvicorn fastapi_app.main:main_app --host 0.0.0.0 --port 8000 --reload --reload-dir fastapi_app"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+      - aiohttp
+    networks:
+      - internal
+      - redis_network
+
+  aiohttp:
+    container_name: aiohttp
+    build:
+      context: .
+      dockerfile: aiohttp_server/Dockerfile
+    volumes:
+      - ./aiohttp_server:/aiohttp_server
+      - ./config.py:/config.py
+    working_dir: /
+    command: sh -c "adev runserver --port 8080 aiohttp_server/main.py"
+    depends_on:
+      - postgres
+    networks:
+      - internal
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    environment:
+    - POSTGRES_DB=${POSTGRES_DB:-task}
+    - POSTGRES_USER=${POSTGRES_USER:-admin}
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-admin}
+    networks:
+      - internal
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    volumes:
+      - redis_data:/data
+    networks:
+      - redis_network
+
+volumes:
+  postgres_data: {}
+  redis_data: {}
+
+networks:
+  internal:
+    driver: bridge
+  redis_network:
+    driver: bridge
